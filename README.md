@@ -135,13 +135,13 @@ remote access attempt
 2023-02-17 09:34:16 192.168.1.37 19.89.143.11 UDP 67 Allow 256
 ```
 
-**Description of log entries:**  
+**Description of log entries:**  Log shows outbound UDP allowed on Port 67, which typically used for DHCP server responses, not for outbound client traffic.
 
-**Reason for concern:** 
+**Reason for concern:** It's rare and potentially suspicious for sa device to send DHCP traffic to a public IP. Could indiciate a leak of DHCP requests. 
 
-**Potential impact:** 
+**Potential impact:** Data leakage, if internal network configurtion is exposed to enternal systems. Malware might be using DHCP protocols to probe. 
 
-**Possible explanations:** 
+**Possible explanations:** Misconfigured firewall, spoofed pcket, unauthorized device attempting to communicate. 
 
 
 <!--  -->
@@ -151,16 +151,16 @@ remote access attempt
 **Log Entries:**
 
 ```plaintext
-2023-02-17 09:34:03 192.168.1.27 45.137.80.15 TCP 41284 Deny 48
+2023-02-17 09:36:07 192.168.1.61 217.23.2.15 TCP 21 Allow 3629
 ```
 
-**Description of log entries:** 
+**Description of log entries:** Successful outbound connection over port 21, which is the default port for FTP and 3629 bytes of data was transfered.
 
-**Reason for concern:** 
+**Reason for concern:** FTP is an insecure protocol, and is ofter disabled and replaced with SFTP. This means the FTP was most likely not disabled or replaced, allowing external connections to be made. 
 
-**Potential impact:** 
+**Potential impact:** Malware, Data Exflirtion > if FTP wad not disbaled, that means, that host could use FTP for data leakage. 
 
-**Possible explanations:** 
+**Possible explanations:** Misconfiguration or older software, or maybe a user is testing and needs FTP access.
 
 <!--  -->
 
@@ -169,7 +169,7 @@ remote access attempt
 **Log Entries:**
 
 ```plaintext
-2023-02-17 09:34:03 192.168.1.27 45.137.80.15 TCP 41284 Deny 48
+2023-02-17 09:34:27 192.168.1.142 43.250.192.131 TCP 80 Allow 1203
 ```
 
 **Description of log entries:** 
@@ -187,7 +187,7 @@ remote access attempt
 **Log Entries:**
 
 ```plaintext
-2023-02-17 09:34:03 192.168.1.27 45.137.80.15 TCP 41284 Deny 48
+2023-02-17 09:35:26 192.168.1.54 203.208.40.53 TCP 443 Allow 2749
 ```
 
 **Description of log entries:** 
